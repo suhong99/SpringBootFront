@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+<body>
+<h3>회원정보</h3>
+
+<table border="1">
+	<thead>
+		<tr>
+			<th>번호</th><th>id</th><th>password</th><th>name</th><th>email</th>
+		</tr>
+	</thead>
+	<tbody id="data>
+	</tbody>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$.ajax({
+				url:"http://localhost:3000/allmember",
+				type:"get",
+				processData:false,
+				success:function(memllist){
+					alert('success');
+					for(let i =0; i < memlist.length;i++){
+					
+				},
+				error:function(){
+					alert('error');
+				}		
+			});	
+		});
+	</script>
+</table>
+
+
+</body>
+</html>
+
+
+
+
+

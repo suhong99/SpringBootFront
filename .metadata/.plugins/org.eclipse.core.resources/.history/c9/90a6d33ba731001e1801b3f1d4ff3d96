@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+<body>
+<h3>회원정보</h3>
+
+<table border="1">
+<thead>
+	<tr>
+		<th>번호</th><th>id</th><th>password</th><th>name</th><th>email</th>
+	</tr>
+</thead>
+<tbody id="data>
+</tbody>
+</table>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$.ajax({
+		url:"http://localhost:3000/allmember",
+		type:"post",
+		data:new FormData( $("#uploadFileFrm")[0] ),
+		enctype:"multipart/form-data",
+		processData:false,
+		contentType:false,
+		cache:false,
+		success:function(str){
+			alert('success');
+			$("#result").text(str);
+		},
+		error:function(){
+			alert('error');
+		}		
+	});	
+});
+</script>
+</body>
+</html>
+
+
+
+
+
