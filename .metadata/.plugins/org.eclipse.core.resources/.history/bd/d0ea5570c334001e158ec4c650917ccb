@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>pdswrite</title>
+</head>
+<body>
+
+<h1>자료추가</h1>
+<p id="result">...</p>
+
+<form id="uploadFileFrm">
+	번호:<input type="text" name="number"><br>
+	이름:<input type="text" name="name"><br>
+	주소:<input type="text" name="address"><br><br>
+	
+	파일:<input type="file" name="uploadFile"><br><br>
+	
+	<button type="button" id="uploadBtn">파일업로드</button>
+</form>
+
+<script type="text/javascript">
+$("#uploadBtn").click(function(){
+	
+	$.ajax({
+		url:"http://localhost:3000/fileupload",
+		type:"post",
+		data:new FormData( $("#uploadFileFrm")[0] ),
+		enctype:"multipart/form-data",
+		processData:false,
+		contentType:false,
+		cache:false,
+		success:function(str){
+			alert('success');
+			$("#result").text(str);
+		},
+		error:function(){
+			alert('error');
+		}		
+	});	
+});
+</script>
+</body>
+</html>

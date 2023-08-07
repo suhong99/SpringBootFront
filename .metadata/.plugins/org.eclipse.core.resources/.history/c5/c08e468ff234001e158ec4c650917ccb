@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>pdsupdate</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+</head>
+<body>
+
+<h1>자료상세보기</h1>
+<hr>
+
+<div align="center">
+
+<table border="1">
+<col width="150px"><col width="500px">
+<tr>
+	<th>아이디</th>
+	<td><input type="text" readonly id="id" name="id"></td>
+</tr>
+<tr>
+	<th>제목</th>
+	<td> <input type="text" id="title" name="title"></td>
+</tr>
+<tr>
+	<th>파일이름</th>
+	<td>
+		<input type="file" name="uploadFile">
+	</td>
+</tr>
+<tr>
+	<th>내용</th>
+	<td>
+		<textarea rows="5" cols="50" name="content" id="content"></textarea>
+	</td>
+</tr>
+</table>
+<button type="button" onclick="update()">수정완료</button>
+</div>
+
+<script type="text/javascript">
+const url = new URL(location.href);
+const urlParams = url.searchParams;
+let seq  = urlParams.get("seq");
+let detailInfo;
+$(document).ready(function () {
+
+	$.ajax({
+		url:"http://localhost:3000/pdsdetail",
+		type:"get",
+		data:{seq},
+		success:function(detail){
+			console.log(detail);
+			// 구조 분해 할당
+			detailInfo= detail;
+	         const { id, wdate, regdate, readcount,downcount, title, content,filename } = detail;
+	        $("#id").text(id);
+	        $("#regdate").text(regdate);
+	        $("#readcount").text(readcount);
+	        $("#downcount").text(downcount);
+	        $("#title").text(title);
+	        $("#content").val(content);
+	        $("#filename").text(filename);
+		},
+		error:function(){
+			alert('detail error');
+		}		
+	}); 
+	
+});
+
+function update(){
+    // const { seq,filename,newfilename } = detailInfo;
+	location.href = "pdsupdate.html?seq="+seq;
+
+ //	location.href = "http://localhost:3000/filedownload?filename=" + filename+"&seq="+seq+"&newfilename="+newfilename;
+}
+</script>
+
+
+
+</body>
+</html>
+
+

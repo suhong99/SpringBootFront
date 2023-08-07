@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>pdslist</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+</head>
+<body>
+<h1>자료실</h1>
+
+<br>
+
+<table border="1">
+<col width="50"/><col width="100"/><col width="500"/>
+<col width="100"/><col width="100"/><col width="200"/>
+
+<thead>
+<tr>
+	<th>번호</th><th>작성자</th><th>제목</th>
+	<th>조회수</th><th>다운수</th><th>작성일</th>
+</tr>
+</thead>
+<tbody id="pdslist">
+
+</tbody>
+
+</table>
+
+
+<script type="text/javascript">
+	$(document).ready(function (){
+		$.ajax({
+			url:"http://localhost:3000/pdslist",
+			type:"get",
+			success:function(pdslist){
+				alert('성공');
+			},
+			error: function(){
+				alert('땡');
+			}
+		})
+	})
+</script>
+
+
+</body>
+</html>
