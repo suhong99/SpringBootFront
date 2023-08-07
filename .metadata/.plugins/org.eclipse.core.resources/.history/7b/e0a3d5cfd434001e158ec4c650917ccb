@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>pdswrite</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+</head>
+<body>
+
+<h1>자료추가</h1>
+<p id="result">...</p>
+
+<form id="uploadFileFrm">
+	아이디:<input type="text" readonly name="id"><br>
+	제목:<input type="text" name="title"><br>
+	내용:<input type="text" name="content"><br><br>
+	
+	파일이름:<input type="file" name="uploadFile"><br><br>
+	
+	<button type="button" id="uploadBtn">파일업로드</button>
+</form>
+
+<script type="text/javascript">
+const myId= JSON.parse(sessionStorage.getItem("login")).id;
+document.querySelector('input[name="id"]').value = myId;
+
+
+$("#uploadBtn").click(function(){
+	
+	$.ajax({
+		url:"http://localhost:3000/fileupload",
+		type:"post",
+		data:new FormData( $("#uploadFileFrm")[0] ),
+		enctype:"multipart/form-data",
+		processData:false,
+		contentType:false,
+		cache:false,
+		success:function(str){
+			// 	alert('success');
+			$("#result").text(str);
+		},
+		error:function(){
+			alert('error');
+		}		
+	});	
+});
+</script>
+</body>
+</html>

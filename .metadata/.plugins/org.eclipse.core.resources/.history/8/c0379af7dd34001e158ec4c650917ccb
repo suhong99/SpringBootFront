@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>pdswrite</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+</head>
+<body>
+
+<h1>자료추가</h1>
+<p id="result">...</p>
+
+<form id="uploadFileFrm">
+<table border="1">
+<col width="150px"><col width="500px">
+<tr>
+	<th>아이디</th>
+	<td><input type="text" readonly name="id"></td>
+</tr>
+<tr>
+	<th>제목</th>
+	<td> <input type="text" name="title"></td>
+</tr>
+<tr>
+	<th>파일이름</th>
+	<td>
+		<input type="file" name="uploadFile">
+	</td>
+</tr>
+<tr>
+	<th>내용</th>
+	<td>
+		<textarea rows="5" cols="50" name="content"></textarea>
+	</td>
+</tr>
+</table>
+	<button type="button" id="uploadBtn">파일업로드</button>
+</form>
+
+<script type="text/javascript">
+const myId= JSON.parse(sessionStorage.getItem("login")).id;
+document.querySelector('input[name="id"]').value = myId;
+
+
+$("#uploadBtn").click(function(){
+	
+	$.ajax({
+		url:"http://localhost:3000/fileupload",
+		type:"post",
+		data:new FormData( $("#uploadFileFrm")[0]),
+		enctype:"multipart/form-data",
+		processData:false,
+		contentType:false,
+		cache:false,
+		success:function(str){
+			// 	alert('success');
+			if(str=="file upload success"){
+				alert("파일업로드 되었씁니다.");
+				location.href="pdslist.html";
+			}else{
+				alert("파일업로드 실패.");
+			}
+		},
+		error:function(){
+			alert('error');
+		}		
+	});	
+});
+</script>
+</body>
+</html>

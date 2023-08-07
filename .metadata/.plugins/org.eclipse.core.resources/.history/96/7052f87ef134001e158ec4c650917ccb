@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>pdsdetail</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+</head>
+<body>
+
+<h1>자료상세보기</h1>
+<hr>
+
+<div align="center">
+
+<table border="1">
+<col width="150px"><col width="500px">
+<tr>
+	<th>아이디</th>
+	<td id="id"></td>
+</tr>
+<tr>
+	<th>조회수</th>
+	<td id="readcount"></td>
+</tr>
+<tr>
+	<th>다운로드수</th>
+	<td id="downcount"></td>
+</tr>
+<tr>
+	<th>등록일</th>
+	<td id="regdate"></td>
+</tr>
+<tr>
+	<th>제목</th>
+	<td id="title"></td>
+</tr>
+<tr>
+	<th>다운로드</th>
+	<td>
+	<div style="display: flex; flex-direction: row">
+		<p id="filename"></p>
+		<input type="button" value="다운로드"	onclick="download()">
+	</div>
+	</td>
+</tr>
+<tr>
+	<th>내용</th>
+	<td>
+		<textarea rows="5" cols="50" id="content"></textarea>
+	</td>
+</tr>
+</table>
+<button type="button">수정</button>
+</div>
+
+<script type="text/javascript">
+const url = new URL(location.href);
+const urlParams = url.searchParams;
+let seq  = urlParams.get("seq");
+let detailInfo;
+$(document).ready(function () {
+
+	$.ajax({
+		url:"http://localhost:3000/pdsdetail",
+		type:"get",
+		data:{seq},
+		success:function(detail){
+			console.log(detail);
+			// 구조 분해 할당
+			detailInfo= detail;
+	         const { id, wdate, regdate, readcount,downcount, title, content,filename } = detail;
+	        $("#id").text(id);
+	        $("#regdate").text(regdate);
+	        $("#readcount").text(readcount);
+	        $("#downcount").text(downcount);
+	        $("#title").text(title);
+	        $("#content").val(content);
+	        $("#filename").text(filename);
+		},
+		error:function(){
+			alert('detail error');
+		}		
+	}); 
+	
+});
+
+function download(){
+    // const { seq,filename,newfilename } = detailInfo;
+	location.href = "http://localhost:3000/filedownload?&seq="+seq;
+
+ //	location.href = "http://localhost:3000/filedownload?filename=" + filename+"&seq="+seq+"&newfilename="+newfilename;
+}
+
+function download(){
+    // const { seq,filename,newfilename } = detailInfo;
+	location.href = "pdsupdate.html?seq="+seq;
+
+ //	location.href = "http://localhost:3000/filedownload?filename=" + filename+"&seq="+seq+"&newfilename="+newfilename;
+}
+</script>
+<!-- 
+<script type="text/javascript">
+function filedown(seq, newfilename, filename) {
+	location.href = "filedownload.do?seq=" + seq + "&newfilename=" + newfilename + "&filename=" + filename;
+}
+</script>
+ -->
+
+
+
+</body>
+</html>
+
+

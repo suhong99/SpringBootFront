@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>pdslist</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+</head>
+<body>
+<h1>자료실</h1>
+
+<br>
+
+<table border="1">
+<col width="50"/><col width="100"/><col width="500"/>
+<col width="100"/><col width="100"/><col width="200"/>
+
+<thead>
+<tr>
+	<th>번호</th><th>작성자</th><th>제목</th>
+	<th>조회수</th><th>다운수</th><th>작성일</th>
+</tr>
+</thead>
+<tbody id="pdslist">
+
+</tbody>
+
+</table>
+
+<br>
+<a href="pdswrite.html">자료추가</a>
+
+<script type="text/javascript">
+	$(document).ready(function (){
+		$.ajax({	// axios
+			url:"http://localhost:3000/pdslist",
+			type:"get",
+			success:function(pdslist){
+				for(let i=0; i<pdslist.length;i++){
+					let str = "<tr>";
+					str += "<td>"+ (i+1) + "</td>";
+					str += "<td>"+ pdslist[i].id + "</td>";
+					str += "<td>"+ pdslist[i].title + "</td>";
+					str += "<td>"+ pdslist[i].readcoount + "</td>";
+					str += "<td>"+ pdslist[i].downcount + "</td>";
+					str += "<td>"+ pdslist[i].regdate + "</td>";
+					
+					$("#pdslist").append(str);
+					str += "</tr>";
+				}		
+			},
+			error: function(){
+				alert('땡');
+			}
+		})
+	})
+</script>
+
+
+</body>
+</html>
