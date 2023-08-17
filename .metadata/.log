@@ -5685,3 +5685,9 @@ Caused by: java.net.ConnectException: Connection refused: no further information
 
 !ENTRY org.eclipse.equinox.p2.repository 2 0 2023-08-17 10:33:49.733
 !MESSAGE Using unsafe http transport to retrieve http://download.eclipse.org/jetty/updates/jetty-wtp/1.0.0.201203011137, see CVE-2021-41033. Consider using https instead.
+
+!ENTRY org.eclipse.jdt.launching 4 150 2023-08-17 10:39:17.964
+!MESSAGE The archive: C:/apache-tomcat-9.0.78(2)/bin/bootstrap.jar which is referenced by the classpath, does not exist.
+
+!ENTRY org.eclipse.wst.server.ui 4 0 2023-08-17 10:39:33.110
+!MESSAGE The server is invalid or missing
